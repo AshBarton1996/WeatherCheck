@@ -1,13 +1,19 @@
 class TemperaturePresenter
   include HTTParty
 
-  def initialize(postcode)
-    # @postcode = postcode_reformat(:postcode)
-    @response = ("https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409" + "&#{@postcode}")
+  def initialize(args)
+    if args[:postcode].present?
+      @postcode = postcode_reformat(args[:postcode])
+      @response = HTTParty.get("https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409" + "&q=#{@postcode}")
+    end
+  end
+
+  def response
+    @response
   end
 
   def hot_definition
-    "Anything above 20 degrees. Getting to the hot as balls range"
+    "Anything above 20 degrees. Getting to the hot as balls range."
   end
 
   def warm_definition
@@ -19,25 +25,31 @@ class TemperaturePresenter
   end
 
   def postcode_temperature
-    @response['current']['temp_c'] ? uk_postcode_valid(@postcode) : 'Please enter a valid UK postcode'
-    # base_uri = 'https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409')
-    # response = base_uri + "&#{@postcode}"
-    # response = HTTParty.get('https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409&q=ip130sr')
+    @response['current']['temp_c'] ? uk_postcode_valid? : 'Please enter a valid UK postcode'
     temperature = @response['current']['temp_c']
     temperature
   end
 
-  def uk_postcode_valid
-    case @response
+  def hot_warm_cold?
+    case
+    when postcode_temperature > 20
+      'hot'
+    when postcode_temperature >= 10 && postcode_temperature <= 20
+      'warm'
+    else
+      'cold'
+    end
+  end
+
+  def uk_postcode_valid?
+    case
     when @response['error'].present?
       false
-    when @reponse['location']['country'] != 'UK'
+    when @response['location']['country'] != 'UK'
       false
     else
       true
     end
-
-    # true ? @response['error'].blank? : false
   end
 
   def postcode_reformat(postcode)
@@ -45,4 +57,13 @@ class TemperaturePresenter
     reformatted_postcode
   end
 
+  def hot_or_not_statement
+    statement = ''
+    if uk_postcode_valid?
+      statement = ("The temperature is " + postcode_temperature.to_s + " degrees and therefor it is " + hot_warm_cold? + " in your local area.")
+    else
+      statement = 'Please enter a correct UK Postcode.'
+    end
+    statement
+  end
 end
