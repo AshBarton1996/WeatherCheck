@@ -31,6 +31,8 @@ gem "haml"
 
 gem "httparty"
 
+gem 'pry', '~> 0.13.1'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -40,6 +42,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rspec-rails', '~> 5.0.0'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
@@ -49,6 +52,7 @@ group :development do
 end
 
 group :test do
+  gem 'rspec-rails', '~> 5.0.0'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
