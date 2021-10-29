@@ -1,5 +1,6 @@
-describe 'temperature_presenter' do
+# frozen_string_literal: true
 
+describe 'temperature_presenter' do
   before do
     @valid_postcode_presenter = TemperaturePresenter.new(postcode: 'CT6 6YY')
     @invalid_postcode_presenter = TemperaturePresenter.new(postcode: 'CT6 6YY')
@@ -41,8 +42,8 @@ describe 'temperature_presenter' do
   describe 'hot_or_not_statement' do
     context 'when a correct UK address has been searched' do
       before do
-        @response = HTTParty.get("https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409&q=ct66yy")
-        @hot_warm_cold? = @valid_postcode_presenter.hot_warm_cold?
+        @response = HTTParty.get('https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409&q=ct66yy')
+        @hot_warm_cold = @valid_postcode_presenter.hot_warm_cold?
         @postcode_temperature = @valid_postcode_presenter.postcode_temperature
       end
 
