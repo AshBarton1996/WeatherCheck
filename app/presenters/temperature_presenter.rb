@@ -8,10 +8,6 @@ class TemperaturePresenter
     end
   end
 
-  def response
-    @response
-  end
-
   def hot_definition
     "Anything above 20 degrees. Getting to the hot as balls range."
   end
@@ -25,7 +21,6 @@ class TemperaturePresenter
   end
 
   def postcode_temperature
-    @response['current']['temp_c'] ? uk_postcode_valid? : 'Please enter a valid UK postcode'
     temperature = @response['current']['temp_c']
     temperature
   end
