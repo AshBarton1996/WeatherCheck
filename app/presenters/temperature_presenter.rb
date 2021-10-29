@@ -1,13 +1,11 @@
-# frozen_string_literal: true
-
 class TemperaturePresenter
   include HTTParty
 
   def initialize(args)
-    if args[:postcode].present?
-      @postcode = postcode_reformat(args[:postcode])
-      @response = HTTParty.get("https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409&q=#{@postcode}")
-    end
+    return if args[:postcode].blank?
+
+    @postcode = postcode_reformat(args[:postcode])
+    @response = HTTParty.get("https://api.weatherapi.com/v1/current.json?key=55b7fdf17805493199a143223212409&q=#{@postcode}")
   end
 
   def hot_definition
