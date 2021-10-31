@@ -26,10 +26,10 @@
 
   %br
 
-  = form_with url: "/weather/search", method: :get do |form|
+  = form_with url: "/weather/search", method: :get, local: true do |form|
     = form.label :query, "Search postcode:"
     = form.text_field :query
-    = form.submit "Search"
+    = form.submit "Search", :name => nil
 
   %br
 
