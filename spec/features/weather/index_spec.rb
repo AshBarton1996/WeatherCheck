@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature "Hot, warm or cold", type: :feature do
-  scenario "search a valid UK postcode" do
-    visit "/weather"
+RSpec.feature 'Hot, warm or cold', type: :feature do
+  scenario 'search a valid UK postcode' do
+    visit '/weather'
 
     expect(page).to have_text('Is it hot or not?')
     expect(page).to have_text('Anything above 20 degrees. Getting to the hot as balls range.')
@@ -15,8 +17,8 @@ RSpec.feature "Hot, warm or cold", type: :feature do
     expect(page).to have_text('The temperature is')
   end
 
-  scenario "search an invalid UK postcode" do
-    visit "/weather"
+  scenario 'search an invalid UK postcode' do
+    visit '/weather'
 
     expect(page).to have_text('Is it hot or not?')
 

@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 describe TemperaturePresenter do
   before do
-    @valid_postcode_presenter =  TemperaturePresenter.new(postcode: 'CT6 6YY')
+    @valid_postcode_presenter = TemperaturePresenter.new(postcode: 'CT6 6YY')
     @invalid_postcode_presenter = TemperaturePresenter.new(postcode: 'CT6 6YYKR')
     @no_postcode_presenter = TemperaturePresenter.new(postcode: nil)
 
@@ -15,7 +16,7 @@ describe TemperaturePresenter do
 
   describe '.hot_definition' do
     it 'returns the definition of hot' do
-      expect(@valid_postcode_presenter.hot_definition).to eq("Anything above 20 degrees. Getting to the hot as balls range.")
+      expect(@valid_postcode_presenter.hot_definition).to eq('Anything above 20 degrees. Getting to the hot as balls range.')
     end
   end
 
@@ -27,7 +28,7 @@ describe TemperaturePresenter do
 
   describe '.cold_definition' do
     it 'returns the definition of cold' do
-      expect(@valid_postcode_presenter.cold_definition).to eq("Anything below 10 degrees. Much lower and Pengu would be comfortable.")
+      expect(@valid_postcode_presenter.cold_definition).to eq('Anything below 10 degrees. Much lower and Pengu would be comfortable.')
     end
   end
 
