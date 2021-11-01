@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The index page is running on /weather.
 
-Things you may want to cover:
+I did not create any models or databases for this task due it only needing to return 3 definitions and API information, so instead I stored the definitions in methods in the presenter and called those methods when required. If a greater amount of information was to be stored then I would have created the database and models required to store them and access them.
 
-* Ruby version
+spec paths are:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+spec/requests/weather_spec.rb
+spec/features/weather/index_spec.rb
+spec/presenters/temperature_presenter_spec.rb
